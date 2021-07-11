@@ -1,11 +1,11 @@
-SWIG_SRC = scuff.i scuff-python.i
+SWIG_SRC = scuff.i scuff-python.i *.i
 EXTRA_DIST = $(SWIG_SRC) 
 BUILT_SOURCES = scuff-python.cpp scuff.py
 
 _scuff_la_SOURCES = scuff-python.cpp
 _scuff_la_LIBADD = ../libscuff/libscuff.la $(LIBS)
 _scuff_la_LDFLAGS = -module -version-info @SHARED_VERSION_INFO@
-_scuff_la_CPPFLAGS = $(PYTHON_INCLUDES) $(AM_CPPFLAGS)
+_scuff_la_CPPFLAGS = $(PYTHON_INCLUDES) $(AM_CPPFLAGS) -Wfatal-errors
 
 if WITH_PYTHON
 python_PYTHON = scuff.py
@@ -34,6 +34,6 @@ AM_CXXFLAGS=-W
 if MAINTAINER_MODE
 
 scuff-python.cpp scuff.py: $(SWIG_SRC) $(top_srcdir)/libs/libscuff/libscuff.h $(top_srcdir)/libs/libscuff/GTransformation.h $(top_srcdir)/libs/libIncField/libIncField.h $(top_srcdir)/libs/libhrutil/libhrutil.h $(top_srcdir)/libs/libMatProp/libMatProp.h $(top_srcdir)/libs/libhmat/libhmat.h $(top_srcdir)/libs/libStaticSolver/StaticSolver.h $(top_srcdir)/libs/libscuffSolver/scuffSolver.h
-	swig -Wall $(AM_CPPFLAGS) -outdir $(builddir) -c++ -python -o $(builddir)/scuff-python.cpp $(srcdir)/scuff.i
+	swig -Wall $(AM_CPPFLAGS) -outdir $(builddir) -c++ -v -python -builtin -o $(builddir)/scuff-python.cpp $(srcdir)/scuff.i
 
 endif

@@ -36,3 +36,7 @@ namespace std {
 %apply cdouble IN_ARRAY1[ANY] { const cdouble [3] };
 %apply double INPLACE_ARRAY1[ANY] { double [6], double [3] };
 %apply cdouble INPLACE_ARRAY1[ANY] { cdouble [6], cdouble [3] };
+
+%include "scuff-numpy-utils.i"
+%include "scuff-libhmat-python.i"
+%include "scuff-libscuff-python.i"
