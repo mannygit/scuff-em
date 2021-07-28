@@ -16,6 +16,13 @@
 /**
     HVector
 */
+
+%ignore HVector::InitHVector;
+%ignore HVector::ReadFromFile;
+%ignore HVector::ImportFromHDF5;
+%ignore HVector::ImportFromText;
+%ignore HVector::InitHVector;
+
 %{
 
 void fill_hvector_array_info(HVector * v, void ** data, int * shape, int * npy_type) {
@@ -78,6 +85,15 @@ HVector * hvector_from_pyobject(PyObject * pyobj) {
 %ignore HMatrix::ReadFromFile;
 %ignore HMatrix::ImportFromHDF5;
 %ignore HMatrix::ImportFromText;
+
+// Setting these to read only since modifying these in python would cause memory leaks or out of bounds errors
+%immutable HMatrix::NR;
+%immutable HMatrix::NC;
+%immutable HMatrix::RealComplex;
+%immutable HMatrix::StorageType;
+%immutable HMatrix::DM;
+%immutable HMatrix::ZM;
+%immutable HMatrix::ownsM;
 
 %{
 
